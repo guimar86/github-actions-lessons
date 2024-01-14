@@ -1,0 +1,35 @@
+name: Test React App
+on:
+  push:
+    branches:
+      - "main"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code from repository
+        uses: actions/checkout@v3
+      - name: setup nodjs environment
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+      - name: install dependencies
+        run: npm ci
+      - name: Run tests
+        run: npm test
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code from repository
+        uses: actions/checkout@v3
+      - name: setup nodjs environment
+        uses: actions/setup-node@v3
+        with:
+            node-version: "18"
+      - name: install dependencies
+        run: npm ci
+      - name: Build project
+        run: npm run build
+      - name: Deploy
+        run: echo "Deploying ..."
+
